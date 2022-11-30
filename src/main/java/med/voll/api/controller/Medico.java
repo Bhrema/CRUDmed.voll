@@ -7,9 +7,10 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import med.voll.api.endereco.Endereco;
 import med.voll.api.medico.Especialidade;
+import med.voll.api.medico.dadosCadastroMedico;
 
 @Table(name = "medicos")
-@Entity
+@Entity(name = "Medico")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -26,4 +27,12 @@ public class Medico {
 
     @Embedded
     private Endereco endereco;
+
+    public Medico(dadosCadastroMedico dados) {
+        this.nome = dados.nome();
+        this.email = dados.email();
+        this.crm = dados.crm();
+        this.especialidade = dados.especialidade();
+        this.endereco = new Endereco(dados.endereco());
+    }
 }
